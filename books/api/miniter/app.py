@@ -24,7 +24,7 @@ def sign_up():
     return jsonify(new_user)
 
 add.tweets = []
-
+# 트윗
 @app.route('/tweet', methods=['POST'])
 def tweet():
     payload = request.json 
@@ -43,7 +43,7 @@ def tweet():
         'tweet' : tweet
     })
     return '', 200
-
+# 팔로우
 @app.route('/follow', methods=['POST'])
 def follow():
     payload = request.json 
@@ -57,7 +57,7 @@ def follow():
     user.setdefault('follow', set()).add(user_id_to_follow)
 
     return jsonify(user)
-
+# 언팔로우
 @app.route('/unfollow', methods=['POST'])
 def unfollow():
     payload = request.json 
@@ -69,3 +69,17 @@ def unfollow():
     user = app.users[user_id]
     user.setdefault('follow', set()).discard(user_id_to_follow)
     return jsonify(user)
+# 타임라인
+@app.route('/timeline/<int:user_id>', methods=['GET'])
+def timeline():
+    if user_id not in app.users:
+        return '사용자가 존재하지 않습니다', 400
+    
+    follow_list = app.users[user_id].get('follow',set())
+    follow_list.add(user_id)
+    timeline = [tweet for tweet in app.tweets if tweet['user_id']]
+
+    return jsonify({
+        'user_id' : user_id,
+        'timeline' : timeline
+    })
