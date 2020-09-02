@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask.json import JSONEncoder
 
+
 app = Flask(__name__)
 app.users = {}
 app.id_count = 1
