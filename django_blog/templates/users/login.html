@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    로그인
+{% endblock page_title %}
+
+{% block content %}
+
+<form action="{% url 'users:login' %}"></form>
+{% csrf_token %}
+<input type="hidden" name="next" value=""/>
+{{ form.as_p }}
+<button type="submit">로그인</button>
+</form>
+
+{% endblock %}
