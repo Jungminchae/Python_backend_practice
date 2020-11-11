@@ -1,12 +1,13 @@
 from django.shortcuts import reverse
 from django.views.generic import FormView
 from django.contrib.auth import authenticate, login
+from django.urls import reverse_lazy
 from . import forms 
 
 class LoginView(FormView):
 
     template_name = "users/login.html"
-    form_class = forms.RegisterForm
+    form_class = forms.LoginForm
 
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
@@ -21,4 +22,20 @@ class LoginView(FormView):
         if next_arg is not None:
             return next_arg
         else:
-            return reverse("")
+            return reverse("core:home")
+
+class RegisterView(FormView):
+
+    template_name = "users/register.html"
+    form_class = forms.RegisterForm
+    success_url = reverse_lazy("core:home")
+
+    def form_valid(self, form):
+        form.save()
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        print(self.request)
+        user = authenticate(self.request, email=email, password=password)
+        print(user)
+        user.verify_email()
+        return super().form_valid(form)

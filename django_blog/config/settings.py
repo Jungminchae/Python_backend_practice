@@ -30,7 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-DJANGO_APPS = ['users']
+DJANGO_APPS = ['users','blogs']
+
+THIRD_PARTY_APPS = ['taggit']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + DJANGO_APPS
+] + DJANGO_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
