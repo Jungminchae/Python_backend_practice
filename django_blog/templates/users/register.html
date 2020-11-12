@@ -5,5 +5,12 @@
 {% endblock page_title %}
 
 {% block content %}
-    {{form.as_p}}
+<form method="POST" action="{% url 'users:register' %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value=""/>
+    {{ form.as_p }}
+    <button type="submit">회원가입</button>
+</form>
 {% endblock content %}
+
+
