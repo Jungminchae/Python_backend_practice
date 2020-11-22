@@ -35,6 +35,15 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+
+    GENDER_MALE = 'male'
+    GENDER_FEMALE = 'female'
+    GENDER_OTHERS = 'others'
+
+    GENDER_CHOICES = (
+        (GENDER_MALE, 'Male'), (GENDER_FEMALE, 'Female'), (GENDER_OTHERS, 'Others')
+    )
+
     email = models.EmailField(verbose_name="email", max_length=255, unique=True)
     username = models.CharField(max_length=30)
     objects = UserManager()
@@ -43,3 +52,5 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.pk} {self.email}"
+
+
