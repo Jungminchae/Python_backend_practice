@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<form action="{% url 'users:login' %}"></form>
+<form method="POST" action="{% url 'users:login' %}"></form>
 {% csrf_token %}
 <input type="hidden" name="next" value=""/>
 {{ form.as_p }}
