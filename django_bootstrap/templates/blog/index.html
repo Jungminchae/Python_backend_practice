@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block main_area %}
-<h1>Blog</h1>
+{{ post.category }}
+<h1>
+    Blog
+    {% if category %}
+    <span class="badge badge-secondary">{{ category }}</span>
+    {% endif %}
+</h1>
 {% if posts.exists %}
 {% for p in posts %}
 <!-- Blog Post -->
