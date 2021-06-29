@@ -31,14 +31,13 @@ class TestView(TestCase):
         post_002 = Post.objects.create(title="두 번째 포스트 입니다", content="죄송합니다 여자친구 있어요")
         self.assertEqual(Post.objects.count(), 2)
         # 3.2 포스트 목록 페이지를 새로 고침했을 때,
-        print("왜 안되는지 잘 모르겠다")
         response2 = self.client.get("/blog/")
+        self.assertEqual(response2.status_code, 200)
         soup = BeautifulSoup(response2.content, "html.parser")
         # 3.3 메인 영역에 포스트 2개의 타이틀이 존재한다.
         main_area = soup.find("div", id="main-area")
         self.assertIn(post_001.title, main_area.text)
         self.assertIn(post_002.title, main_area.text)
-        print("실패")
         # 3.4 "아직 게시물이 없습니다" 라는 문구가 없어야 한다.
         self.assertNotIn("아직 게시물이 없습니다", main_area.text)
 
