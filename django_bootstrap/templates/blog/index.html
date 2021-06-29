@@ -82,9 +82,9 @@
 
     <div class="container">
         <div class="row my-3">
-            <div class="col-md-8 col-lg-9">
+            <div class="col-md-8 col-lg-9" id="main-area">
                 <h1>Blog</h1>
-
+                {% if posts.exists %}
                 {% for p in posts %}
                 <!-- Blog Post -->
                 <div class="card mb-4">
@@ -109,7 +109,9 @@
                     </div>
                 </div>
                 {% endfor %}
-
+                {% else %}
+                <h1>아직 게시물이 없습니다</h1>
+                {% endif %}
                 <!-- Pagination -->
                 <ul class="pagination justify-content-center mb-4">
                     <li class="page-item">
