@@ -7,8 +7,10 @@ name = "pypi"
 django = "==3.1.7"
 pillow = "*"
 beautifulsoup4 = "*"
+django-extensions = "*"
 
 [dev-packages]
+ipython = "*"
 
 [requires]
 python_version = "3.9"

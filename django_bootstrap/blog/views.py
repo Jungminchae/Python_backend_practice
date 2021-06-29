@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView
-from .models import Post
+from .models import Post, Category
 
 # listview 쓸거임
 # def index(request):
@@ -14,6 +14,12 @@ class PostListView(ListView):
     ordering = "-pk"
     context_object_name = "posts"
 
+    def get_context_data(self, **kwargs):
+        context = super(PostListView, self).get_context_data()
+        context["categories"] = Category.objects.all()
+        context["no_category_post_count"] = Post.objects.filter(category=None).count()
+        return context
+
 
 # detail view 쓸거임
 # def single_post_page(request, pk):
@@ -25,3 +31,9 @@ class PostListView(ListView):
 class SinglePostView(DetailView):
     model = Post
     template_name = "blog/single_page.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(SinglePostView, self).get_context_data()
+        context["categories"] = Category.objects.all()
+        context["no_category_post_count"] = Post.objects.filter(category=None).count()
+        return context

@@ -9,7 +9,7 @@
 {% if posts.exists %}
 {% for p in posts %}
 <!-- Blog Post -->
-<div class="card mb-4">
+<div class="card mb-4" id="post-{{p.id}}">
     <!-- <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap"> -->
     {% if p.head_image %}
     <img class="img-fluid rounded" src="{{ p.head_image.url }}" alt="{{ p.title }}">
@@ -18,6 +18,11 @@
     {% endif %}
 
     <div class="card-body">
+        {% if p.category %}
+        <span class="badge badge-secondary float-right">{{ p.category }}</span>
+        {% else %}
+        <span class="badge badge-secondary float-right">미분류</span>
+        {% endif %}
         <h2 class="card-title">{{ p.title }}</h2>
         {% if p.hook_text %}
         <h4 class="text-muted"> {{ p.hook_text }}</h3>
@@ -27,7 +32,7 @@
     </div>
     <div class="card-footer text-muted">
         Posted on {{ p.created_at }} by
-        <a href="#">{{ p.author | uppper }}</a>
+        <a href="#">{{ p.author | upper }}</a>
     </div>
 </div>
 {% endfor %}
