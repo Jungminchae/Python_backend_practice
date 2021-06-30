@@ -31,7 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DJANGO_APPS = ["blog", "single_pages"]
-THIRD_PARTY_APPS = ["django_extensions"]
+THIRD_PARTY_APPS = [
+    "django_extensions",
+    "crispy_forms",
+    "markdownx",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+]
 
 INSTALLED_APPS = (
     [
@@ -41,6 +49,7 @@ INSTALLED_APPS = (
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        "django.contrib.sites",
     ]
     + DJANGO_APPS
     + THIRD_PARTY_APPS
@@ -124,3 +133,17 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "_media")
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+LOGIN_REDIRECT_URL = "/blog/"

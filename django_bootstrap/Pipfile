@@ -8,6 +8,9 @@ django = "==3.1.7"
 pillow = "*"
 beautifulsoup4 = "*"
 django-extensions = "*"
+django-crispy-forms = "*"
+django-markdownx = "*"
+django-allauth = "*"
 
 [dev-packages]
 ipython = "*"
