@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block main_area %}
+{% if user.is_authenticated %}
+{% if user.is_superuser or user.is_staff %}
+<a href="/blog/create_post/" class="btn btn-info float-right btn-sm" type="button">New Post</a>
+{% endif %}
+{% endif %}
 <h1>
     Blog
     {% if category %}
