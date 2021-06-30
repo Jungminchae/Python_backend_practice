@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from .models import Post, Category
+from django.views.generic import ListView, DetailView, CreateView
+from .models import Post, Category, Tag
 
 # listview 쓸거임
 # def index(request):
@@ -58,3 +58,31 @@ def category_page(request, slug):
             "category": category,
         },
     )
+
+
+def tag_page(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    post_list = tag.post_set.all()
+
+    return render(
+        request,
+        "blog/index.html",
+        {
+            "posts": post_list,
+            "categories": Category.objects.all(),
+            "no_category_post_count": Post.objects.filter(category=None).count(),
+            "tag": tag,
+        },
+    )
+
+
+class PostCreateView(CreateView):
+    model = Post
+    fields = [
+        "title",
+        "hook_text",
+        "content",
+        "head_image",
+        "file_upload",
+        "category",
+    ]

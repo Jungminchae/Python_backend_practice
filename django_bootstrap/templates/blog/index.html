@@ -10,6 +10,10 @@
     {% if category %}
     <span class="badge badge-secondary">{{ category }}</span>
     {% endif %}
+    {% if tag %}
+    <span class="badge badge-light"><i class="fas fa-tags"></i> {{ tag }} ({{ tag.post_set.count }})</span>
+    {% endif %}
+
 </h1>
 {% if posts.exists %}
 {% for p in posts %}
@@ -33,6 +37,14 @@
         <h4 class="text-muted"> {{ p.hook_text }}</h3>
             {% endif %}
             <p class="card-text">{{ p.content | truncatewords:45 }}</p>
+            {% if p.tags.exists %}
+            <i class="fas fa-tags"></i>
+            {% for tag in p.tags.iterator %}
+            <a href="{{ tag.get_absolute_url }}"><span class="badge bg-light text-dark">{{ tag }}</span></a>
+            {% endfor %}
+            <br>
+            <br>
+            {% endif %}
             <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">

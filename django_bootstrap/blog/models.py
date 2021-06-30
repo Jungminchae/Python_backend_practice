@@ -45,7 +45,7 @@ class Post(models.Model):
     )
     # blank True는 폼에 없어도 되는 것이고 null True는 DB에 없어도 되는 것
 
-    tag = models.ManyToManyField(Tag, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return f"[{self.pk}] {self.title} {self.author}"
