@@ -8,10 +8,12 @@ from .views import (
     PostUpdateView,
     new_comment,
     CommentUpdateView,
+    delete_comment,
 )
 
 
 urlpatterns = [
+    path("delete_comment/<int:pk>/", delete_comment),
     path("update_comment/<int:pk>/", CommentUpdateView.as_view()),
     path("update_post/<int:pk>/", PostUpdateView.as_view()),
     path("create_post/", PostCreateView.as_view()),
