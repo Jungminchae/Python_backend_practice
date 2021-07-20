@@ -88,9 +88,6 @@ def search_question_view(request, keyword):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-# 질문 작성일 기준/ 각 월별 전체 질문 중에서 /가장 좋아요가 많은 질문을/ 출력하는 API 개발
-# 문제가 잘 이해되지 않아서, 특정 질문을 선택했을 때 그 질문의 작성일 기준 월 전체 질문 중에서
-# 가장 좋아요 많은 질문을 출력하는 API로 작성했습니다
 @api_view(["GET"])
 def monthly_top_question_view(request, pk):
 
