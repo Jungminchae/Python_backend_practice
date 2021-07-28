@@ -8,6 +8,8 @@ from flask_login import (
     logout_user,
 )
 from flask_cors import CORS
+from blog_view import blog
+
 
 # https 만을 지원하는 기능을 http에서 테스트할 때 필요한 설정
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -18,6 +20,7 @@ CORS(app)
 # Django secret key 생각하면 될 듯
 app.secure_key = "mc_server"
 
+app.register_blueprint(blog.blog_abtest, url_prefix="/blog")
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.session_protection = "strong"  # session을 보다 복잡하게
