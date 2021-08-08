@@ -10,7 +10,11 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-from .serializers import RegisgerSerializer, EmailVerificationSerializer
+from .serializers import (
+    RegisgerSerializer,
+    EmailVerificationSerializer,
+    LoginSerializer,
+)
 from .models import User
 from .utils import Util
 
@@ -78,3 +82,12 @@ class VerifyEmail(APIView):
             return Response(
                 {"error": "Invalid Token"}, status=status.HTTP_400_BAD_REQUEST
             )
+
+
+class LoginView(GenericAPIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

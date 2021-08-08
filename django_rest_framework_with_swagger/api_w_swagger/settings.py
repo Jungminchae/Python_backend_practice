@@ -32,7 +32,7 @@ AUTH_USER_MODEL = "authentications.User"
 
 # Application definition
 
-APPS = ["rest_framework", "authentications", "drf_yasg"]
+APPS = ["rest_framework", "authentications", "drf_yasg", "expenses"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -42,6 +42,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ] + APPS
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    }
+}
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
