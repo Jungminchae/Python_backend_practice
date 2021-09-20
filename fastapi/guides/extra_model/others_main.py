@@ -1,5 +1,5 @@
 # Union or anyOf
-from typing import Union, List
+from typing import Union, Dict, List
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -52,3 +52,9 @@ items = [
 @app.get("/items/", response_model=List[Item])
 async def read_items():
     return items
+
+
+# Dict
+@app.get("/keyword-weights/", response_model=Dict[str, float])
+async def read_keyword_weights():
+    return {"foo": 2.3, "bar": 3.4}
